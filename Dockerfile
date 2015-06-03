@@ -1,18 +1,10 @@
-FROM ubuntu:14.04
+FROM    centos:centos6
 
 # Install Node.js
-RUN \
-  cd /tmp && \
-  wget http://nodejs.org/dist/node-latest.tar.gz && \
-  tar xvzf node-latest.tar.gz && \
-  rm -f node-latest.tar.gz && \
-  cd node-v* && \
-  ./configure && \
-  CXX="g++ -Wno-unused-local-typedefs" make && \
-  CXX="g++ -Wno-unused-local-typedefs" make install && \
-  cd /tmp && \
-  rm -rf /tmp/node-v* && \
-  npm install -g npm && \
+ # Enable EPEL for Node.js
+RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+# Install Node.js and npm
+RUN     yum install -y npm
 #ONBUILD COPY package.json /src
 # ONBUILD RUN npm install
 COPY . /src
