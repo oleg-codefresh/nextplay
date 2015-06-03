@@ -14,4 +14,5 @@ RUN npm install -g bower grunt-cli
 RUN npm install
 RUN bower install --allow-root ---config.interactive=false
 #CMD [ "sh", "../start.sh" ]
+EXPORT 9000
 CMD ["npm", "start"]
